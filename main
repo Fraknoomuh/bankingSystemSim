@@ -10,7 +10,7 @@ int main() {
   char check;
   
   do {
-    if(end == 1) { // Here for the check if user wants to continue
+    if(end == 1) { // Here to check if user wants to continue
       cout << "How many transactions?: ";
       cin >> tranacts;
     }
