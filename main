@@ -1,0 +1,73 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+  //Instance Variables
+  int end = 1, tranacts, witdCheck = 1;
+  double bal = 0.0, depo, witd;
+  char check;
+  
+  do {
+    if(end == 1) { // Here for the check if user wants to continue
+      cout << "How many transactions?: ";
+      cin >> tranacts;
+    }
+    for(int i = tranacts; i > 0; i--) { // Loops depending on the number the user put
+      cout << endl <<
+              "+---------------------------------+\n" <<
+              "|           Chabot Bank           |\n" <<
+              "|                                 |\n" <<
+              "| (1) Deposit                     |\n" <<
+              "| (2) Withdraw                    |\n" <<
+              "|                                 |\n" <<
+              "+---------------------------------+\n\n>> ";
+      cin >> end;
+  
+      if(end == 1) { // Lets you Deposite into your balance
+        cout << "How much money do you wish to deposit: $";
+        cin >> depo;
+        bal += depo;
+        cout << "Your new balance is: $" << bal << endl;
+      }
+      else if(end == 2) { // Lets you withdraw from your balance
+        if(bal <= 0) {
+          cout << "Your balance is " << bal << ". You cannot make a withdraw." << endl;
+        }
+        else {
+          while(witdCheck != 0) { // Makes user enter a valid amount
+            cout << "How much would you like to withdraw: $";
+            cin >> witd;
+            bal -= witd;
+              if(bal < 0) { // Checks, so user can't grab infinite money
+                bal += witd;
+                cout << "Error! You cannot takeout that amount of money." << endl;
+              }
+              else { // Display your balance if you do have enough money
+                cout << "Your new balance is: $" << bal << endl;
+                witdCheck = 1;
+              }
+          }
+        }
+        
+      }
+      else { // Makes the user try again
+        cout << "Error please try again. Enter a number from 1 to 2" << endl;
+      }
+    }
+    end = 2; // This will skip over the trasaction part if they enter it wrong
+    cout << endl << "Would you like to make another transaction? (y/n)\n\n>> ";
+    cin >> check;
+    if(check == 'N' || check == 'n') // Ends the simulation
+      end = 0;
+    else if(check == 'Y' || check == 'y') // Loops back to the top
+      end = 1;
+    else // Makes the user reinput there response 
+      cout << "Error! Please try again!" << endl;
+
+  } while(end != 0); // End of outter do loop
+
+  cout << endl << "Thank you for using chabot bank";
+  
+} // End of main
